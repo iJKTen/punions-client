@@ -1,4 +1,4 @@
-import { useReducer, useEffect} from 'react';
+import { useReducer, useEffect } from 'react';
 
 const HttpAction = Object.freeze({
   'send': 'SEND',
@@ -8,13 +8,13 @@ const HttpAction = Object.freeze({
 });
 
 const httpReducer = (curState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case HttpAction.send:
       return { loading: true, error: null, data: null }
     case HttpAction.response:
       return { ...curState, loading: false, data: action.responseData }
     case HttpAction.error:
-      return { loading: false, error: action.errorMessage }
+      return { loading: false, error: action.errorMessage, data:null }
     case HttpAction.clear:
       return { ...curState, error: null }
     default:
@@ -30,41 +30,38 @@ const useHttp = () => {
   }
   const [httpState, dispatch] = useReducer(httpReducer, initialState);
 
-  useEffect(() => {
-    const sendRequest = () => {
-      dispatch({ type: HttpAction.send });
-      
-      fetch('https://xgjpf1gn11.execute-api.us-east-1.amazonaws.com/dev/v1/game/create', {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      .then((response) => {
-        return response.json();
-      })
-      .then((jsonData) => {
-        dispatch({ 
-          type: HttpAction.response, 
-          responseData: jsonData
-        })
-      })
-      .catch((error) => {
-        dispatch({
-          type: HttpAction.error, 
-          errorMessage: error.message
-        })
-      });
-    };
+  const sendRequest = () => {
+    dispatch({ type: HttpAction.send });
 
-    sendRequest();
-  }, [])
+    fetch('https://xgjpf1gn11.execute-api.us-east-1.amazonaws.com/dev/v1/game/create', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((response) => {
+      return response.json();
+    })
+    .then((jsonData) => {
+      dispatch({
+        type: HttpAction.response,
+        responseData: jsonData
+      })
+    })
+    .catch((error) => {
+      dispatch({
+        type: HttpAction.error,
+        errorMessage: error.message
+      })
+    });
+  };
 
   return {
     isLoading: httpState.loading,
     data: httpState.data,
-    error: httpState.error
+    error: httpState.error,
+    sendRequest: sendRequest
   }
 }
 
