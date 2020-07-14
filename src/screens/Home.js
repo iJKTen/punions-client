@@ -105,6 +105,7 @@ const Home = () => {
         <Rules>
           <h2>Rules</h2>
           <ol>
+            <li>Once the game starts do not refresh your page.</li>
             <li>The first player to join plays first.</li>
             <li className='current'>Currently playing player is indicated by an icon on the scoreboard.</li>
             <li>You will be provided a word to make a pun out of it.</li>

@@ -19,3 +19,6 @@ Home Screen
 
 Game Created
 ![App](https://raw.githubusercontent.com/iJKTen/punions-client/master/screenshots/GameCreated.png)
+
+Add Player
+![App](https://raw.githubusercontent.com/iJKTen/punions-client/master/screenshots/AddPlayer.png)

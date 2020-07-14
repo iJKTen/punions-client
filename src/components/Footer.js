@@ -2,7 +2,7 @@ import React from 'react'
 import styled from "@emotion/styled";
 
 const FooterStyle = styled.footer`
-  background-color: #FFF;
+  background-color: #F4F4F4;
   display: flex;
   justify-content: space-between;
   padding: 0px 20px 0px 20px;
