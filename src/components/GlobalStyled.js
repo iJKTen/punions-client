@@ -18,7 +18,8 @@ export const GlobalStyle = props => (
         height: 100%;
         display: flex;
         flex-direction: column;
-        background-color: white;
+        background-color: #F6EFEF;
+        font-size: 18px;
       }
       header {
         width: 100%;
@@ -26,12 +27,17 @@ export const GlobalStyle = props => (
       h1, h2, h3, h4 {
         line-height: 32px;
         padding-bottom: 4px;
+        color: #181818;
       }
-      a, a:link, a:visited {
-        color: blue;
-      } 
       p {
         margin: 20px;
+      }
+      li {
+        list-style-type: none;
+      }
+      .App {
+        width: 700px;
+        margin: 0px auto;
       }
     `}
   />

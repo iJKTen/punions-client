@@ -1,22 +1,36 @@
-import React from 'react';
-import { Router } from '@reach/router';
-import {GlobalStyle} from './components/GlobalStyled';
+import React, { Fragment } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import { GlobalStyle } from './components/GlobalStyled';
 import Home from './screens/Home';
 import Game from './screens/Game';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="App">
-      <GlobalStyle />
-      <header></header>
-      <main>
-        <Router>
-          <Home path="/" />
-          <Game path="game/:gameId" />
-        </Router>
-      </main>
-      <footer></footer>
-    </div>
+    <Fragment>
+      <div className="App">
+        <GlobalStyle />
+        <Header />
+        <main>
+          <Router>
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route path="/:gameId">
+                <Game />
+              </Route>
+            </Switch>
+          </Router>
+        </main>
+      </div>
+      <Footer></Footer>
+    </Fragment>
   );
 }
 

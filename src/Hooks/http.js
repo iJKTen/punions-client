@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from 'react';
+import { useReducer } from 'react';
 
 const HttpAction = Object.freeze({
   'send': 'SEND',
@@ -10,11 +10,11 @@ const HttpAction = Object.freeze({
 const httpReducer = (curState, action) => {
   switch (action.type) {
     case HttpAction.send:
-      return { loading: true, error: null, data: null }
+      return { status: 'loading', error: null, data: null }
     case HttpAction.response:
-      return { ...curState, loading: false, data: action.responseData }
+      return { ...curState, status: 'success', data: action.responseData }
     case HttpAction.error:
-      return { loading: false, error: action.errorMessage, data:null }
+      return { status: 'error', error: action.errorMessage, data: null }
     case HttpAction.clear:
       return { ...curState, error: null }
     default:
@@ -24,7 +24,7 @@ const httpReducer = (curState, action) => {
 
 const useHttp = () => {
   const initialState = {
-    loading: false,
+    status: 'initial',
     error: null,
     data: null
   }
@@ -40,25 +40,25 @@ const useHttp = () => {
         'Content-Type': 'application/json'
       }
     })
-    .then((response) => {
-      return response.json();
-    })
-    .then((jsonData) => {
-      dispatch({
-        type: HttpAction.response,
-        responseData: jsonData
+      .then((response) => {
+        return response.json();
       })
-    })
-    .catch((error) => {
-      dispatch({
-        type: HttpAction.error,
-        errorMessage: error.message
+      .then((jsonData) => {
+        dispatch({
+          type: HttpAction.response,
+          responseData: jsonData
+        })
       })
-    });
+      .catch((error) => {
+        dispatch({
+          type: HttpAction.error,
+          errorMessage: error.message
+        })
+      });
   };
 
   return {
-    isLoading: httpState.loading,
+    status: httpState.status,
     data: httpState.data,
     error: httpState.error,
     sendRequest: sendRequest
