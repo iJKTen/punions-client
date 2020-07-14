@@ -15,4 +15,7 @@ npm start
 
 ### Puions Client
 Home Screen
-![App](https://raw.githubusercontent.com/iJKTen/punions-client/master/Home.png)
+![App](https://raw.githubusercontent.com/iJKTen/punions-client/master/screenshots/Home.png)
+
+Game Created
+![App](https://raw.githubusercontent.com/iJKTen/punions-client/master/screenshots/GameCreated.png)
