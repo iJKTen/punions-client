@@ -14,4 +14,5 @@ npm start
 ```
 
 ### Puions Client
-![App](https://raw.githubusercontent.com/iJKTen/react-movie-search/master/App.png)
+Home Screen
+![App](https://raw.githubusercontent.com/iJKTen/punions-client/master/Home.png)
